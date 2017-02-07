@@ -1,0 +1,6 @@
+skbeam.core.calibration.estimate_d_blind
+========================================
+
+.. currentmodule:: skbeam.core.calibration
+
+.. autofunction:: estimate_d_blind

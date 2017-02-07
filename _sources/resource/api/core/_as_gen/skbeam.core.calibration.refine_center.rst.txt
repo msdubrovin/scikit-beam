@@ -1,0 +1,6 @@
+skbeam.core.calibration.refine_center
+=====================================
+
+.. currentmodule:: skbeam.core.calibration
+
+.. autofunction:: refine_center

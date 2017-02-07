@@ -1,0 +1,6 @@
+skbeam.core.cdi.find_support
+============================
+
+.. currentmodule:: skbeam.core.cdi
+
+.. autofunction:: find_support

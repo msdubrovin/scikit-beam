@@ -1,0 +1,6 @@
+skbeam.core.cdi.cal_diff_error
+==============================
+
+.. currentmodule:: skbeam.core.cdi
+
+.. autofunction:: cal_diff_error

@@ -1,0 +1,6 @@
+skbeam.core.cdi.generate_disk_support
+=====================================
+
+.. currentmodule:: skbeam.core.cdi
+
+.. autofunction:: generate_disk_support

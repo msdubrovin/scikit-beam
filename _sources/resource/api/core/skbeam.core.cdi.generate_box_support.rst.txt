@@ -1,0 +1,6 @@
+skbeam.core.cdi.generate_box_support
+====================================
+
+.. currentmodule:: skbeam.core.cdi
+
+.. autofunction:: generate_box_support
