@@ -3,11 +3,13 @@
 import setuptools
 from distutils.core import setup
 import versioneer
+from distutils.command.build_clib import build_clib
 import numpy as np
 import os
 import sys
 from Cython.Build import cythonize
 from distutils.extension import Extension
+from Cython.Distutils import build_ext
 
 # Utility function to read the README file.
 # Used for the long_description.  It's nice, because now 1) we have a top level
@@ -36,9 +38,14 @@ def c_ext():
                       extra_link_args=['-lgomp'])]
 
 
+#def cpp_ext():
+#    return Extension('skbeam.core.algorithms.algos_ext',
+#                     ['skbeam/core/algorithms/algos_ext.pyx', 'skbeam/core/algorithms/src/ctest.c'],
+#                     include_dirs=['skbeam/core/algorithms', 'skbeam/core/algorithms/src'])
+
 def cpp_ext():
     return Extension('skbeam.core.algorithms.algos_ext',
-                     ['skbeam/core/algorithms/algos_ext.pyx', 'skbeam/core/algorithms/src/ctest.c'],
+                     ['skbeam/core/algorithms/algos_ext.pyx'],
                      include_dirs=['skbeam/core/algorithms', 'skbeam/core/algorithms/src'])
 
 
@@ -46,10 +53,16 @@ def cython_ext():
     return cythonize(['**/*.pyx', cpp_ext()])
 
 
+libctest = ('ctest', {'sources':['skbeam/core/algorithms/src/ctest.c'],\
+                      'include_dirs':['skbeam/core/algorithms/src']})
+
+#    cmdclass=versioneer.get_cmdclass(),
+
 setup(
     name='scikit-beam',
     version=versioneer.get_version(),
-    cmdclass=versioneer.get_cmdclass(),
+    libraries=[libctest],
+    cmdclass={'build_clib':build_clib, 'build_ext':build_ext},
     author='Brookhaven National Lab',
     description="Data analysis tools for X-ray science",
     packages=setuptools.find_packages(exclude=['doc']),
