@@ -44,16 +44,60 @@ from cpython.object cimport *
 #    np.float64_t
 
 #------------------------------
+#------------------------------
+#------------------------------
 
 cdef extern from "ctest.h":
     void cpptest1(int n)
     void cpptest2(int n, int m)
-    #void cpptest0() # except +
 
-def cytest():
-    print "In cytest"
-    cpptest1(6)
-    #cpptest2(5,6)
+#------------------------------
+
+def pycpptest1(int n) :
+    print "In pycpptest1"
+    cpptest1(n)
+
+#------------------------------
+
+def pycpptest2(int n, int m) :
+    print "In pycpptest2"
+    cpptest2(n,m)
+
+#------------------------------
+#------------------------------
+#------------------------------
+
+cdef extern from "ctest.h" namespace "NS_CPPTest":
+    cdef cppclass CPPTest:
+        CPPTest(int) except +
+        void test_pub(int) except +
+        float _v
+
+#------------------------------
+
+cdef class pyCPPTest :
+    """ Python wrapper for C++ class CPPTest 
+    """
+    cdef CPPTest* cobj 
+
+    def __cinit__(self, int n) :
+        print "In pyCPPTest.__cinit__"
+        self.cobj = new CPPTest(n);
+        self.py_set_v(0)
+
+    def py_test_pub(self, int n) :
+        print "In pyCPPTest.py_test_pub"
+        self.cobj.test_pub(n)
+
+    def py_set_v(self, float v) :
+        self.cobj._v = v
+
+    def py_get_v(self) :
+        return self.cobj._v
+
+    def __dealloc__(self) :
+        print "In pyCPPTest.__dealloc__"
+        del self.cobj
 
 #------------------------------
 

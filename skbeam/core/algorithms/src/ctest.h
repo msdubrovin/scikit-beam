@@ -15,22 +15,20 @@
 //  double value;
 //} peak;
 
-//void cpptest0();
 void cpptest1(int n);
+
 void cpptest2(int n, int m);
 
+namespace NS_CPPTest {
 
-//namespace NS_CPPTest {
-/*
 class CPPTest {
 public:
-
   CPPTest(int n);
   virtual ~CPPTest();
-
   void test_pub(int n);
-}
-*/
-//} // namespace
+  float _v;
+};
+
+} // namespace
 
 #endif

@@ -38,12 +38,13 @@ def c_ext():
 
 def cpp_ext():
     return Extension('skbeam.core.algorithms.algos_ext',
-                     ['skbeam/core/algorithms/algos_ext.pyx', 'skbeam/core/algorithms/src/ctest.c'],
+                     sources=['skbeam/core/algorithms/algos_ext.pyx', 'skbeam/core/algorithms/src/ctest.cpp'],
+                     language = "c++",
                      include_dirs=['skbeam/core/algorithms', 'skbeam/core/algorithms/src'])
 
 
 def cython_ext():
-    return cythonize(['**/*.pyx', cpp_ext()])
+    return cythonize([cpp_ext(), '**/*.pyx'])
 
 
 setup(
